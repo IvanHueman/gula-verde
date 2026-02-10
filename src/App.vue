@@ -1,21 +1,17 @@
 <script setup>
 import Navbar from './components/Navbar.vue'
-import Hero from './components/Hero.vue'
-import StatsBar from './components/StatsBar.vue'
-import ProductosGrid from './components/ProductsGrid.vue'
-import Contacto from './components/Contacto.vue'
 import Footer from './components/Footer.vue'
+// Nota: Solo dejamos los componentes que se ven en TODAS las páginas
 </script>
 
 <template>
   <div class="app-wrapper">
     <Navbar />
+    
     <main>
-      <Hero />
-      <StatsBar />
-      <ProductosGrid />
-      <Contacto />
+      <router-view></router-view>
     </main>
+
     <Footer />
     
     <a href="https://wa.me/tu_numero" class="float-whatsapp" target="_blank">
@@ -23,3 +19,12 @@ import Footer from './components/Footer.vue'
     </a>
   </div>
 </template>
+
+<style>
+/* Aquí puedes dejar estilos globales si los tienes */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+</style>
