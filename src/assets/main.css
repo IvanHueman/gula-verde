@@ -10,6 +10,7 @@
     --light-bg: #f8fdf9;
     --white: #ffffff;
     --font-main: 'Poppins', sans-serif;
+    --offer-color: #e74c3c;
     
     --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
     --shadow-hover: 0 20px 40px rgba(46, 204, 113, 0.2);
@@ -24,7 +25,6 @@ body {
     overflow-x: hidden; 
     background-color: var(--white);
 }
-
 a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 ul { list-style: none; }
 img { max-width: 100%; display: block; }
@@ -34,192 +34,68 @@ img { max-width: 100%; display: block; }
 ========================================= */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
 .section { padding: 80px 0; }
+.bg-light { background-color: var(--light-bg); }
 .green-text { color: var(--primary-color); }
+.mt-4 { margin-top: 1.5rem; }
 
+/* Botones Globales */
 .btn-primary {
     display: inline-block;
     background: linear-gradient(to right, var(--primary-color), var(--dark-green));
-    color: var(--white) !important;
+    color: var(--white);
     padding: 14px 35px;
     border-radius: 50px;
     font-weight: 600;
     box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
     text-transform: uppercase;
+    letter-spacing: 1px;
     font-size: 0.9rem;
-    cursor: pointer;
     border: none;
-    transition: 0.3s;
+    cursor: pointer;
+    transition: all 0.3s;
 }
-
 .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.full-width { width: 100%; }
 
-/* =========================================
-   3. HEADER & NAVEGACIÓN
-========================================= */
-.header {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-    position: fixed; width: 100%; top: 0; z-index: 1000;
+.section-title {
+    text-align: center; font-size: 2.5rem; margin-bottom: 50px;
+    color: var(--dark-green); font-weight: 700; position: relative;
 }
-
-.nav-container { 
-    display: flex; justify-content: space-between; align-items: center; 
-    height: 80px; max-width: 1200px; margin: 0 auto; padding: 0 25px;
-}
-
-.logo { font-size: 1.8rem; font-weight: 700; }
-
-.nav-menu { display: flex; gap: 30px; list-style: none; }
-.nav-link { font-weight: 600; font-size: 1rem; }
-.nav-link:hover { color: var(--primary-color); }
-.nav-link.highlight { color: #e74c3c; }
-
-/* Botón Hamburguesa */
-.hamburger {
-    display: none; background: none; border: none;
-    font-size: 1.8rem; color: var(--text-color); cursor: pointer;
+.section-title::after {
+    content: ''; display: block; width: 60px; height: 3px;
+    background-color: var(--accent-color); margin: 15px auto 0;
 }
 
 /* =========================================
-   4. HERO SECTION (CENTRADO ABSOLUTO)
+   3. SISTEMA DE REVEAL (ANIMACIONES DE SCROLL)
+   ¡IMPORTANTE!: Aquí está el fix de visibilidad
 ========================================= */
 
-.hero {
-    position: relative; 
-    height: 100vh; 
-    width: 100%; 
-    overflow: hidden;
-    display: flex; 
-    align-items: center;    /* CENTRADO VERTICAL */
-    justify-content: center; /* CENTRADO HORIZONTAL */
-    text-align: center;
+/* Estado inicial: Ocultos y desplazados */
+.reveal-up, .reveal-left, .reveal-right, .reveal-zoom {
+    opacity: 0; 
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none; /* Evita clics en elementos invisibles */
 }
 
-.hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-.slide { position: absolute; width: 100%; height: 100%; background-size: cover; background-position: center; animation: slideFade 18s infinite; opacity: 0; }
-.slide1 { background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1610348725531-843dff563e2c?q=80'); }
-.slide2 { background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80'); animation-delay: 6s; }
-.slide3 { background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80'); animation-delay: 12s; }
+.reveal-up { transform: translateY(60px); }
+.reveal-left { transform: translateX(-60px); }
+.reveal-right { transform: translateX(60px); }
+.reveal-zoom { transform: scale(0.8); }
 
-@keyframes slideFade { 0%, 100% { opacity: 0; } 5%, 33% { opacity: 1; } 38% { opacity: 0; } }
-
-.hero-content { 
-    color: var(--white); z-index: 10; position: relative;
-    width: 100%; padding: 0 20px; animation: fadeInUp 1s ease-out;
-}
-.hero-content h1 { font-size: 4.5rem; font-weight: 800; margin-bottom: 5px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
-.hero-content p { font-size: 1.4rem; font-weight: 400; max-width: 800px; margin: 0 auto 30px auto; text-shadow: 1px 1px 5px rgba(0,0,0,0.5); }
-
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-/* =========================================
-   5. BARRA DE ESTADÍSTICAS (3 COLUMNAS)
-========================================= */
-.stats-bar { background-color: var(--dark-green); padding: 70px 0; color: var(--white); }
-.stats-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; }
-.stat-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.stat-item i { font-size: 3.5rem; margin-bottom: 15px; color: var(--accent-color); }
-.stat-item h3 { font-size: 3.5rem; font-weight: 800; line-height: 1; }
-.stat-item p { font-size: 1.4rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
-
-/* =========================================
-   6. PRODUCTOS GRID
-========================================= */
-.grid-products { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
-.product-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-soft); transition: 0.4s; }
-.product-card:hover { transform: translateY(-15px); }
-.product-image { height: 260px; overflow: hidden; }
-.product-info { padding: 25px; text-align: center; }
-
-/* =========================================
-   7. CONTACTO (Pone esto cerca de .info-list i)
-========================================= */
-
-/* Asegura que los iconos de la lista sean amarillos */
-.info-list i {
-    font-size: 1.4rem;
-    color: var(--accent-color) !important; /* El !important fuerza el amarillo */
-    margin-right: 15px;
+/* Estado Activo: Cuando el Intersection Observer añade la clase .active */
+.reveal-up.active, 
+.reveal-left.active, 
+.reveal-right.active, 
+.reveal-zoom.active {
+    opacity: 1 !important;
+    transform: translate(0, 0) scale(1) !important;
+    pointer-events: all;
 }
 
-/* OPCIONAL: Si quieres ser súper específico solo con el pin y el sobre */
-.fa-map-marker-alt, .fa-envelope {
-     color: var(--accent-color);
-}
-.contacto-section { background-color: var(--light-bg); padding: 100px 0; }
-.form-wrapper { display: flex; background: var(--white); border-radius: 25px; overflow: hidden; max-width: 1000px; margin: 0 auto; box-shadow: var(--shadow-soft); }
-.form-info { flex: 1; background: linear-gradient(135deg, var(--dark-green), #1b7a43); color: var(--white); padding: 60px 40px; display: flex; flex-direction: column; justify-content: center; }
-.form-info h3 { font-size: 2.2rem; margin-bottom: 20px; font-weight: 700; }
-.actual-form { flex: 1.4; padding: 60px; }
-.input-group { margin-bottom: 25px; }
-.input-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-color); }
-.input-group input, .input-group textarea { width: 100%; padding: 15px; border: 2px solid #edf2f7; border-radius: 12px; outline: none; font-family: inherit; }
-.input-group input:focus { border-color: var(--primary-color); box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.1); }
+/* Animaciones de Keyframes */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
 
-/* =========================================
-   8. FOOTER (Editado)
-========================================= */
-.footer {
-    background-color: #1a1a1a;
-    color: var(--white);
-    /* CAMBIO AQUÍ: Reducimos el padding superior de 60px a 30px */
-    padding: 30px 0 20px 0;
-    text-align: center;
-}
-
-.footer-social-section { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 20px; }
-.socials { display: flex; justify-content: center; gap: 30px; margin-top: 20px; }
-.social-icon { width: 55px; height: 55px; background: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.6rem; transition: 0.3s; }
-.social-icon:hover { background: var(--primary-color); transform: translateY(-5px); }
-.footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 15px 0; margin-top: 15px; text-align: center; }
-.footer-bottom p { font-size: 0.9rem; opacity: 0.6; }
-
-/* =========================================
-   9. BOTONES FLOTANTES Y RESPONSIVE
-========================================= */
-.float-whatsapp { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; color: #FFF !important; font-size: 30px; display: flex; align-items: center; justify-content: center; z-index: 1000; background-color: #25d366; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-
-@media (max-width: 768px) {
-    .hamburger { display: block; }
-    .nav-menu {
-        position: fixed; top: 80px; right: -100%; flex-direction: column;
-        background-color: var(--white); width: 80%; height: calc(100vh - 80px);
-        transition: 0.4s; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-    }
-    .nav-menu.active { right: 0; }
-    .nav-menu li { width: 100%; border-bottom: 1px solid #f0f0f0; }
-    .nav-link { display: block; padding: 20px; text-align: center; }
-    
-    .stats-container { grid-template-columns: 1fr; }
-    .hero-content h1 { font-size: 2.5rem !important; }
-    .form-wrapper { flex-direction: column; }
-}
-
-/* --- Sección 10: Motores de Animación Global --- */
-
-/* 1. Ciclo de las imágenes de fondo */
-@keyframes slideFade {
-    0%, 100% { opacity: 0; }
-    5%, 33% { opacity: 1; }
-    38% { opacity: 0; }
-}
-
-/* 2. Entrada suave del texto del Hero */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* 3. Atención del botón de WhatsApp */
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-}
+.animate-logo { animation: fadeInDown 0.8s ease-out forwards; }
+.animate-hero { opacity: 0; animation: fadeInUp 1s ease-out forwards; }

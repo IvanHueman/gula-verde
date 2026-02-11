@@ -1,22 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
-// IMPORTACIONES DINÁMICAS (Performance Tuning)
-// Solo se descargan cuando el usuario entra a la URL
-const Home = () => import('../views/Home.vue')
-const Productos = () => import('../components/ProductsGrid.vue')
-const AdminLogin = () => import('../views/Login.vue')
-
-const routes = [
-  { path: '/', name: 'Home', component: Home },
-  { path: '/productos', name: 'Productos', component: Productos },
-  { path: '/portal-gv-2026', name: 'Login', component: AdminLogin }
-]
+import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
-  // Para que al cambiar de página siempre inicie arriba
-  scrollBehavior() {
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [{ path: '/', name: 'home', component: HomeView }],
+  scrollBehavior(to) {
+    if (to.hash) {
+      return { el: to.hash, behavior: 'smooth', top: 80 }
+    }
     return { top: 0 }
   }
 })
