@@ -57,12 +57,12 @@ onMounted(() => {
 
   <TheFooter />
 
-  <a href="mailto:huertamji@gmail.com" class="float-email" target="_blank">
+  <a href="#" class="float-email" target="_blank">
     <i class="fas fa-envelope"></i>
     <span class="tooltip-text">Envíanos un correo</span>
   </a>
 
-  <a href="https://wa.me/525512345678?text=Hola%20Gula%20Verde" class="float-whatsapp" target="_blank">
+  <a href="https://wa.me/5647561780?text=Hola%20Gula%20Verde" class="float-whatsapp" target="_blank">
     <i class="fab fa-whatsapp"></i>
     <span class="tooltip-text">¡Haz tu pedido aquí!</span>
   </a>
